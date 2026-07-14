@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ content.meta_title|default:SITE_NAME }} | {{ SITE_TAGLINE }}{% endblock %}
+{% block meta_description %}{{ content.meta_description|default:SITE_SETTINGS.default_meta_description }}{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow-tag">{{ content.hero_eyebrow }}</div>
+      <h1>{{ content.hero_heading_line1 }}<br><em>{{ content.hero_heading_emphasis }}</em> {{ content.hero_heading_line2_suffix }}</h1>
+      <p class="hero-lede">
+        {{ content.hero_lede }}
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary js-open-quote">{{ content.hero_primary_cta_text }}</button>
+        <a href="{% url 'services' %}" class="btn btn-outline">{{ content.hero_secondary_cta_text }}</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <span class="float-chip chip-rating">★★★★★ <strong>{{ content.hero_rating_text }}</strong></span>
+      <div class="job-card">
+        <div class="job-card-head">
+          <strong>Work Order</strong>
+          <span>{{ content.hero_job_card_number }}</span>
+        </div>
+        <div class="job-card-row"><span class="box">✓</span><span>Service</span></div>
+        <div class="job-card-row"><span class="box">✓</span><span>{{ content.hero_job_card_service_line }}</span></div>
+        <div class="job-card-row"><span class="box">✓</span><span>Crew &mdash; 2 assigned</span></div>
+        <div class="job-card-foot"><span>Status</span><span>Scheduled</span></div>
+        <div class="job-card-stamp">Confirmed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    {% for badge in trust_strip_badges %}
+      <span>✔ {{ badge.text }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">{{ content.services_eyebrow }}</span>
+      <h2>{{ content.services_heading }}</h2>
+      <p>{{ content.services_body }}</p>
+    </div>
+
+    <div class="pegboard reveal">
+      <div class="peg-grid">
+        {% for service in services %}
+          <a href="{% url 'service_detail' service.slug %}" class="peg-tag">
+            <div class="peg-hole"></div>
+            <div class="peg-icon">{% include "core/_emoji.html" with icon=service.icon_key %}</div>
+            <span class="peg-num">TAG {{ forloop.counter|stringformat:"02d" }}</span>
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.summary }}</p>
+          </a>
+        {% endfor %}
+        <button type="button" class="peg-tag peg-cta js-open-quote" style="cursor:pointer; border:none; width:100%;">
+          <div class="peg-hole"></div>
+          <div class="peg-icon">✍️</div>
+          <span class="peg-num">NOT LISTED?</span>
+          <h3>Write your own ticket</h3>
+          <p>Tell us the job &mdash; we'll scope it and quote it.</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="stack-photo">
+        {% if content.about_image %}
+          <img src="{{ content.about_image.url }}" alt="{{ SITE_NAME }} crew at work" loading="lazy">
+        {% else %}
+          <img src="{% static 'images/photos/team-commercial.jpg' %}" alt="{{ SITE_NAME }} crew cleaning a commercial site" loading="lazy">
+        {% endif %}
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">{{ content.about_eyebrow }}</span>
+      <h2 style="margin:12px 0 16px;">{{ content.about_heading }}</h2>
+      <p style="color:var(--muted);">
+        {{ content.about_body }}
+      </p>
+      <ul class="value-list">
+        {% for value in home_values %}
+          <li><span class="value-mark">{{ forloop.counter|stringformat:"02d" }}</span><div><strong>{{ value.title }}</strong><span class="desc">{{ value.description }}</span></div></li>
+        {% endfor %}
+      </ul>
+      <div class="stat-row">
+        {% for stat in home_stats %}
+          <div class="stat"><div class="num stat-count" data-target="{{ stat.target }}">0</div><div class="cap">{{ stat.label }}</div></div>
+        {% endfor %}
+      </div>
+      <div style="margin-top:28px;">
+        <a href="{% url 'about' %}" class="btn btn-outline-dark">More about us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="areas-band section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:var(--mint);">{{ content.areas_eyebrow }}</span>
+      <h2 style="color:var(--white);">{{ content.areas_heading }}</h2>
+      <p style="color:rgba(247,244,236,0.7);">{{ content.areas_body }}</p>
+    </div>
+    <div class="area-grid reveal">
+      {% for area in flat_areas %}
+        <div class="area-cell"><span class="dot"></span>{{ area }}</div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center; margin-top:30px;">
+      <a href="{% url 'service_areas' %}" class="btn btn-outline">View all service areas</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">{{ content.gallery_eyebrow }}</span>
+      <h2>{{ content.gallery_heading }}</h2>
+      <p>{{ content.gallery_body }}</p>
+    </div>
+    <div class="gallery-grid reveal">
+      {% for item in gallery_preview %}
+        <div class="gallery-tile" data-category="{{ item.category.slug }}">
+          {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.display_alt }}" loading="lazy">
+          {% else %}
+            <span class="placeholder-label">📷 Photo coming soon</span>
+          {% endif %}
+          <span class="tile-caption">{{ item.title }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center; margin-top:30px;">
+      <a href="{% url 'our_work' %}" class="btn btn-outline-dark">View full gallery</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">{{ content.testimonials_eyebrow }}</span>
+      <h2>{{ content.testimonials_heading }}</h2>
+    </div>
+    <div class="testi-strip reveal">
+      {% for t in testimonials %}
+        <div class="testi-card">
+          <p>{{ t.quote }}</p>
+          <div class="testi-name">{{ t.author_name }}</div>
+          <div class="testi-role">{{ t.author_role }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact-preview">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">{{ content.contact_eyebrow }}</span>
+      <h2 style="margin:12px 0 20px;">{{ content.contact_heading }}</h2>
+      <div class="contact-info-list">
+        <div class="contact-info-item"><span class="ci-icon">☎</span><div><strong>Phone</strong><span>{{ BUSINESS_PHONE }}</span></div></div>
+        <div class="contact-info-item"><span class="ci-icon">✉</span><div><strong>Email</strong><span>{{ BUSINESS_EMAIL }}</span></div></div>
+        <div class="contact-info-item"><span class="ci-icon">📍</span><div><strong>Head Office</strong><span>{{ BUSINESS_ADDRESS }}</span></div></div>
+        <div class="contact-info-item"><span class="ci-icon">🕐</span><div><strong>Hours</strong><span>{{ BUSINESS_HOURS }}</span></div></div>
+      </div>
+    </div>
+    <div class="workorder reveal">
+      <div class="workorder-head">
+        <h3>Free Quote Request</h3>
+        <span class="wo-no">FORM #Q-NEW</span>
+      </div>
+      {% include "core/_quote_form_workorder.html" %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

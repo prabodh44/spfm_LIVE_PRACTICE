@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ content.meta_title|default:"Our Services" }} | {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ content.meta_description|default:SITE_SETTINGS.default_meta_description }}{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <div class="wrap">
+    <span class="eyebrow">{{ content.hero_eyebrow }}</span>
+    <h1>{{ content.hero_heading }}</h1>
+    <p style="max-width:56ch;color:rgba(255,255,255,0.82);">
+      {{ content.hero_intro }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="showcase-list reveal">
+      {% for service in services %}
+        <a href="{% url 'service_detail' service.slug %}" class="showcase-row reveal">
+          <span class="showcase-num">{{ forloop.counter|stringformat:"02d" }}</span>
+          <span class="showcase-illustration">{% include "core/_illustration.html" with icon=service.icon_key %}</span>
+          <span class="showcase-copy">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.summary }}</p>
+          </span>
+          <span class="showcase-arrow" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>{{ content.cta_heading }}</h2>
+    <p>{{ content.cta_body }}</p>
+    <button type="button" class="btn btn-primary js-open-quote">Get a Free Quote</button>
+  </div>
+</section>
+{% endblock %}

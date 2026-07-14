@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ service.name }} | {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ service.summary }} Servicing suburbs across Australia — request a free quote today.{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <div class="wrap service-hero-grid">
+    <div>
+      <span class="eyebrow"><a href="{% url 'services' %}" style="color:var(--gold-bright);">Services</a> / {{ service.name }}</span>
+      <h1>{{ service.name }}</h1>
+      <p style="max-width:56ch;color:rgba(255,255,255,0.82);">{{ service.summary }}</p>
+    </div>
+    <div class="service-hero-illustration">{% include "core/_illustration.html" with icon=service.icon_key %}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap service-detail-grid">
+    <div>
+      <h2>What's included</h2>
+      <ul class="detail-list">
+        {% for feature in service.features.all %}
+          <li>{{ feature.text }}</li>
+        {% endfor %}
+      </ul>
+
+      <div style="margin-top:34px;">
+        <h2>Why choose {{ SITE_NAME }} for this?</h2>
+        <p>
+          {% if service.long_description %}
+            {{ service.long_description }}
+          {% else %}
+            Our crews are trained specifically for {{ service.name|lower }}, fully
+            insured, and police-checked. We turn up on time, follow a consistent
+            checklist on every visit, and stand behind the result — so you get
+            the same standard, every single time.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <div class="inline-quote-panel">
+      <span class="eyebrow">Free, no-obligation quote</span>
+      <h2>Get a quote for {{ service.name|lower }}</h2>
+      <p style="color:rgba(255,255,255,0.78);">Fill in a few details and we'll send pricing shortly.</p>
+      {% include "core/_quote_form.html" with quote_source="inline" %}
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="tear-divider"></div></div>
+
+<section class="section section-alt">
+  <div class="wrap" style="text-align:center;">
+    <h2>Explore our other services</h2>
+    <p style="max-width:50ch;margin:0 auto 20px;">We also cover residential, commercial, industrial, hospitality, specialised, aged care, and outdoor cleaning.</p>
+    <a href="{% url 'services' %}" class="btn btn-outline-dark">View all services</a>
+  </div>
+</section>
+{% endblock %}

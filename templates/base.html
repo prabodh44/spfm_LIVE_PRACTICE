@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ SITE_NAME }} | {{ SITE_TAGLINE }}{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}{{ SITE_SETTINGS.default_meta_description }}{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="{% static 'images/brand/favicon.png' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="{% url 'home' %}" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <img src="{% static 'images/brand/icon.png' %}" alt="" width="36" height="38">
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">{{ SITE_NAME }}</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}is-active{% endif %}">Home</a>
+      <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}is-active{% endif %}">About Us</a>
+      <a href="{% url 'services' %}" class="{% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'service_detail' %}is-active{% endif %}">Services</a>
+      <a href="{% url 'service_areas' %}" class="{% if request.resolver_match.url_name == 'service_areas' %}is-active{% endif %}">Service Areas</a>
+      <a href="{% url 'our_work' %}" class="{% if request.resolver_match.url_name == 'our_work' %}is-active{% endif %}">Our Work</a>
+      <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}is-active{% endif %}">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:{{ BUSINESS_PHONE_TEL }}" class="tel-pill" aria-label="Call {{ SITE_NAME }}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        {{ BUSINESS_PHONE }}
+      </a>
+      <button type="button" class="btn btn-primary js-open-quote">Get a Free Quote</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% if messages %}
+<div class="wrap flash-wrap">
+  {% for message in messages %}
+    <div class="flash flash-{{ message.tags }}">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      {{ message }}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main id="main-content">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="{% static 'images/brand/logo-full.png' %}" alt="{{ SITE_NAME }}" class="footer-logo">
+      <p>{{ SITE_TAGLINE }}</p>
+      <p class="footer-fine">{{ SITE_SETTINGS.footer_about_text }}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="{% url 'services' %}">Our Services</a>
+      <a href="{% url 'service_areas' %}">Service Areas</a>
+      <a href="{% url 'our_work' %}">Our Work</a>
+      <a href="{% url 'about' %}">About Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a href="tel:{{ BUSINESS_PHONE_TEL }}">{{ BUSINESS_PHONE }}</a>
+      <a href="mailto:{{ BUSINESS_EMAIL }}">{{ BUSINESS_EMAIL }}</a>
+      <span class="footer-address">{{ BUSINESS_ADDRESS }}</span>
+    </div>
+    <div class="footer-col">
+      <h4>Trust &amp; compliance</h4>
+      {% for badge in FOOTER_TRUST_BADGES %}
+        <span class="footer-badge-line">✓ {{ badge.text }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {% now "Y" %} {{ SITE_NAME }}. All rights reserved.</span>
+    <span class="footer-fine">{{ SITE_SETTINGS.footer_fine_print }}</span>
+  </div>
+</footer>
+
+<button type="button" class="mobile-quote-bar js-open-quote">
+  <span>Get a Free Quote</span>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</button>
+
+<div class="quote-modal{% if open_quote_modal %} is-open{% endif %}" id="quoteModal" aria-hidden="{% if open_quote_modal %}false{% else %}true{% endif %}">
+  <div class="quote-modal-backdrop js-close-quote"></div>
+  <div class="quote-modal-panel" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+    <button type="button" class="quote-modal-close js-close-quote" aria-label="Close">&times;</button>
+    <div class="quote-modal-head">
+      <span class="eyebrow">Free, no-obligation quote</span>
+      <h3 id="quoteModalTitle">Request your free quote</h3>
+      <p>Tell us what you need cleaned — we'll come back to you with pricing, fast.</p>
+    </div>
+    {% include "core/_quote_form.html" with quote_source="modal" %}
+  </div>
+</div>
+
+{% if open_quote_modal %}<script>document.body.style.overflow = "hidden";</script>{% endif %}
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

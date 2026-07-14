@@ -1,0 +1,38 @@
+{% load static %}
+<form method="post" action="{{ quote_action|default:request.path }}" class="quote-form">
+  {% csrf_token %}
+  <input type="hidden" name="form_id" value="quote_form">
+  <input type="hidden" name="quote_source" value="workorder">
+
+  <div class="form-row two-up">
+    <div class="field">
+      <label for="id_name">Name</label>
+      {{ quote_form.name }}
+    </div>
+    <div class="field">
+      <label for="id_company_name">Company Name <span class="optional">(optional)</span></label>
+      {{ quote_form.company_name }}
+    </div>
+  </div>
+
+  <div class="form-row two-up">
+    <div class="field">
+      <label for="id_email">Email</label>
+      {{ quote_form.email }}
+    </div>
+    <div class="field">
+      <label for="id_phone">Phone</label>
+      {{ quote_form.phone }}
+    </div>
+  </div>
+
+  <div class="field" style="margin-bottom: 20px;">
+    <label for="id_message">Job Details</label>
+    {{ quote_form.message }}
+  </div>
+
+  <div class="submit-row">
+    <button type="submit" class="btn btn-primary">Submit Request &rarr;</button>
+    <span class="form-note">We reply within one business day.</span>
+  </div>
+</form>

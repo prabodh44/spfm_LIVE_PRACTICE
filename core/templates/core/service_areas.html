@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ content.meta_title|default:"Service Areas" }} | {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ content.meta_description|default:SITE_SETTINGS.default_meta_description }}{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <div class="wrap">
+    <span class="eyebrow">{{ content.hero_eyebrow }}</span>
+    <h1>{{ content.hero_heading }}</h1>
+    <p style="max-width:56ch;color:rgba(255,255,255,0.82);">
+      {{ content.hero_intro }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="areas-grid">
+      {% for region, suburbs in grouped_areas.items %}
+        <div class="area-card">
+          <h3>{{ region }}</h3>
+          <div class="suburb-chip-row">
+            {% for suburb in suburbs %}
+              <span class="suburb-chip">{{ suburb }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="areas-note">
+      {{ content.areas_note }}
+    </p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>{{ content.cta_heading }}</h2>
+    <p>{{ content.cta_body }}</p>
+    <button type="button" class="btn btn-primary js-open-quote">Get a Free Quote</button>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+# Core framework
+Django>=6.0,<6.1
+ 
+# Image handling: required by every ImageField (logo, hero photo, gallery
+# photos) even though it's never imported directly in project code.
+Pillow>=10.0
+ 
+# Loads variables from a local .env file in development (see .env.example).
+python-dotenv>=1.0
+ 
+# --- Production extras -----------------------------------------------------
+gunicorn>=21.0          # WSGI server
+whitenoise>=6.6         # simple static file serving without a CDN
+psycopg2-binary>=2.9    # PostgreSQL driver
+dj-database-url>=2.1    # parses DATABASE_URL into Django's DATABASES format

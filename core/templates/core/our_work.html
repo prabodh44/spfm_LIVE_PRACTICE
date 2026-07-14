@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ content.meta_title|default:"Our Work" }} | {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ content.meta_description|default:SITE_SETTINGS.default_meta_description }}{% endblock %}
+
+{% block content %}
+<section class="service-hero">
+  <div class="wrap">
+    <span class="eyebrow">{{ content.hero_eyebrow }}</span>
+    <h1>{{ content.hero_heading }}</h1>
+    <p style="max-width:56ch;color:rgba(255,255,255,0.82);">
+      {{ content.hero_intro }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="gallery-filters">
+      <button class="filter-chip is-active" data-filter="all">All work</button>
+      {% for service in filter_services %}
+        <button class="filter-chip" data-filter="{{ service.slug }}">{{ service.name }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="gallery-grid">
+      {% for item in gallery %}
+        <div class="gallery-tile"
+             data-category="{{ item.category.slug }}"
+             data-title="{{ item.title }}"
+             {% if item.image %}data-image="{{ item.image.url }}"{% endif %}>
+          {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.display_alt }}">
+          {% else %}
+            <span class="placeholder-label">📷 Photo coming soon</span>
+          {% endif %}
+          <span class="tile-caption">{{ item.title }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-body"></div>
+    <div class="lightbox-caption">
+      <span class="lightbox-caption-text"></span>
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+</div>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>{{ content.cta_heading }}</h2>
+    <p>{{ content.cta_body }}</p>
+    <button type="button" class="btn btn-primary js-open-quote">Get a Free Quote</button>
+  </div>
+</section>
+{% endblock %}

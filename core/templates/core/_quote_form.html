@@ -1,0 +1,38 @@
+{% load static %}
+<form method="post" action="{{ quote_action|default:request.path }}" class="quote-form">
+  {% csrf_token %}
+  <input type="hidden" name="form_id" value="quote_form">
+  <input type="hidden" name="quote_source" value="{{ quote_source|default:'modal' }}">
+
+  <div class="form-row two-up">
+    <div class="field">
+      <label for="id_name">Your name</label>
+      {{ quote_form.name }}
+    </div>
+    <div class="field">
+      <label for="id_company_name">Company name <span class="optional">(optional)</span></label>
+      {{ quote_form.company_name }}
+    </div>
+  </div>
+
+  <div class="form-row two-up">
+    <div class="field">
+      <label for="id_email">Email address</label>
+      {{ quote_form.email }}
+    </div>
+    <div class="field">
+      <label for="id_phone">Phone number</label>
+      {{ quote_form.phone }}
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="id_message">Job details</label>
+    {{ quote_form.message }}
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">
+    Send my free quote request
+  </button>
+  <p class="form-fine">No obligation. We typically reply within one business day.</p>
+</form>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ content.meta_title|default:"About Us" }} | {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ content.meta_description|default:SITE_SETTINGS.default_meta_description }}{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+  <div class="wrap">
+    <span class="eyebrow">{{ content.hero_eyebrow }}</span>
+    <h1>{{ content.hero_heading }}</h1>
+    <p style="max-width:58ch;color:rgba(255,255,255,0.82);">
+      {{ content.hero_intro }}
+    </p>
+    <div class="stat-row" style="margin-top:36px;">
+      {% for stat in stats %}
+        <div class="stat"><strong>{{ stat.value }}</strong><span>{{ stat.label }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal center">
+      <span class="eyebrow">{{ content.values_eyebrow }}</span>
+      <h2>{{ content.values_heading }}</h2>
+    </div>
+    <div class="values-grid reveal">
+      {% for card in value_cards %}
+        <div class="value-card">
+          <div class="service-icon">{% include "core/_icon.html" with icon=card.icon_key %}</div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="tear-divider"></div></div>
+
+<section class="section section-alt">
+  <div class="wrap" style="max-width:760px;">
+    <span class="eyebrow">{{ content.why_eyebrow }}</span>
+    <h2>{{ content.why_heading }}</h2>
+    {{ content.why_body|linebreaks }}
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>{{ content.cta_heading }}</h2>
+    <p>{{ content.cta_body }}</p>
+    <button type="button" class="btn btn-primary js-open-quote">Get a Free Quote</button>
+  </div>
+</section>
+{% endblock %}
