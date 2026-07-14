@@ -33,7 +33,7 @@ SECRET_KEY = env(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = [h.strip() for h in env("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
+ALLOWED_HOSTS = [h.strip() for h in env("DJANGO_ALLOWED_HOSTS", "localhost,192.168.1.30").split(",") if h.strip()]
 
 # Full origins (with scheme) that are trusted to POST to this site — required
 # by Django for CSRF checks whenever the site is reached over HTTPS, or from
