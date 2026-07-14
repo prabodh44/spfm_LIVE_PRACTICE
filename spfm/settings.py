@@ -24,6 +24,7 @@ def env(key, default=""):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # In production this MUST come from an environment variable / .env file.
+# TODO: add secret key to .env file
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     "django-insecure-c0nw1p65)v&+^ro8#!&d0_i0kzsvpr_49r#p97spd=6vd#7max",
