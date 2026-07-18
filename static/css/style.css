@@ -169,8 +169,7 @@ p { margin: 0 0 1em; }
 
 /* keep both numbers on one line down to 860px, then stack them
    if the header ever feels tight on the smaller end of desktop */
-@media (max-width: 1100px) {
-  .tel-pill { flex-wrap: wrap; row-gap: 2px; }
+@media (max-width: 1300px) {
   .main-nav { gap: 20px; }
 }
 
@@ -506,7 +505,7 @@ textarea.field-input { resize: vertical; }
 /* ==========================================================================
    Responsive
    ========================================================================== */
-@media (min-width: 860px) {
+@media (min-width: 1080px) {
   .tel-pill { display: flex; }
 }
 
@@ -523,7 +522,7 @@ textarea.field-input { resize: vertical; }
   .service-detail-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1080px) {
   .service-hero-illustration { display: none; }
   .main-nav {
     position: absolute; top: 100%; left: 0; right: 0; background: var(--teal);
@@ -700,7 +699,7 @@ textarea.field-input { resize: vertical; }
   .showcase-row { grid-template-columns: 34px 52px 1fr; }
   .showcase-arrow { display: none; }
 }
-@media (max-width: 760px) {
+@media (max-width: 1080px) {
   .float-chip { display: none; }
   .showcase-row { padding: 18px 10px; }
 }
