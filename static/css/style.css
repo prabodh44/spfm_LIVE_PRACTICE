@@ -121,6 +121,7 @@ p { margin: 0 0 1em; }
 }
 .site-header.is-scrolled { box-shadow: var(--shadow-lift); }
 .header-row {
+  margin-left: 34px;
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px; padding-top: 0; padding-bottom: 0; height: 72px;
 }
