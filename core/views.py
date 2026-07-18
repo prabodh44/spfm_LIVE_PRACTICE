@@ -54,7 +54,9 @@ def _handle_quote_post(request):
 
 def _flat_service_areas(limit=None):
     areas = ServiceArea.objects.all()
-    flat = [f"{a.suburb}, {a.region.replace('Greater ', '')}" for a in areas]
+    # commented out to fix the home page service area error: it show melbourne CBD, VIC, Victoria
+    # flat = [f"{a.suburb}, {a.region.replace('Greater ', '')}" for a in areas]
+    flat = [f"{a.suburb}" for a in areas]
     return flat[:limit] if limit else flat
 
 
