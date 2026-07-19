@@ -169,15 +169,18 @@ BUSINESS_MAP_EMBED_SRC = env(
 # To send real emails in production, set DJANGO_EMAIL_BACKEND=smtp and fill
 # in the EMAIL_* variables in your .env file.
 
-if env("DJANGO_EMAIL_BACKEND", "console") == "smtp":
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = env("EMAIL_HOST", "smtp.gmail.com")
-    EMAIL_PORT = int(env("EMAIL_PORT", "587"))
-    EMAIL_USE_TLS = env("EMAIL_USE_TLS", "True") == "True"
-    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-else:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# commented out so to place new code for brevo api
+
+# if env("DJANGO_EMAIL_BACKEND", "console") == "smtp":
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_HOST = env("EMAIL_HOST", "smtp.gmail.com")
+#     EMAIL_PORT = int(env("EMAIL_PORT", "587"))
+#     EMAIL_USE_TLS = env("EMAIL_USE_TLS", "True") == "True"
+#     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+#     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# else:
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "website@spfacilitiesmgmt.com.au")
 
