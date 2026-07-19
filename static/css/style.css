@@ -366,8 +366,13 @@ p { margin: 0 0 1em; }
 .area-card h3::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
 .suburb-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .suburb-chip {
-  font-family: var(--font-mono); font-size: 0.78rem; background: var(--mist); color: var(--teal-deep);
-  padding: 6px 12px; border-radius: 999px; font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.99rem;
+  font-weight: 600;
+  background: #FDA172;
+  color: black;
+  padding: 6px 12px;
+  border-radius: 999px;
 }
 .areas-note {
   margin-top: 30px; text-align: center; color: var(--muted); font-size: 0.95rem;
