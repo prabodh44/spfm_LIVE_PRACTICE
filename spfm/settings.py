@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -154,7 +155,7 @@ SITE_NAME = "SP Facilities Management"
 SITE_TAGLINE = "Clean Spaces. Better Places."
 BUSINESS_PHONE = env("BUSINESS_PHONE", "1300 000 000")
 BUSINESS_PHONE_TEL = env("BUSINESS_PHONE_TEL", "+611300000000")
-BUSINESS_EMAIL = env("BUSINESS_EMAIL", "info@spfacilitiesmgmt.com.au")
+BUSINESS_EMAIL = env("BUSINESS_EMAIL", "info@spfacilitiesmanagement.com.au")
 BUSINESS_ADDRESS = env("BUSINESS_ADDRESS", "Suite 4, 120 Example Street, Sydney NSW 2000")
 BUSINESS_MAP_EMBED_SRC = env(
     "BUSINESS_MAP_EMBED_SRC",
@@ -181,8 +182,21 @@ BUSINESS_MAP_EMBED_SRC = env(
 # else:
 #     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+if env("DJANGO_EMAIL_BACKEND", "console") == "anymail":
+    EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+    ANYMAIL = {"BREVO_API_KEY": env("BREVO_API_KEY")}
+elif env("DJANGO_EMAIL_BACKEND", "console") == "smtp":
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = env("EMAIL_HOST", "smtp.gmail.com")
+    EMAIL_PORT = int(env("EMAIL_PORT", "587"))
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS", "True") == "True"
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "website@spfacilitiesmgmt.com.au")
+
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", "info@spfacilitiesmanagement.com.au")
 
 # Where new lead notifications are sent (the business owner's inbox).
 OWNER_NOTIFICATION_EMAIL = env("OWNER_NOTIFICATION_EMAIL", BUSINESS_EMAIL)
