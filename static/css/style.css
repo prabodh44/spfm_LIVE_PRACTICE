@@ -876,10 +876,23 @@ textarea.field-input { resize: vertical; }
 .area-cell {
   border-right: 1px solid rgba(247,244,236,0.18);
   border-bottom: 1px solid rgba(247,244,236,0.18);
-  padding: 20px 18px; font-family: var(--font-mono); font-size: 0.85rem;
-  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.99rem;
+  background: #ED7014;
+  color: black;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.area-cell .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.area-cell .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: black;
+  flex-shrink: 0;
+}
 
 /* ---------- Testimonial strip ---------- */
 .testi-strip { display: flex; gap: 22px; overflow-x: auto; padding-bottom: 10px; }
