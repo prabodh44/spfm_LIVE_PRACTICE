@@ -123,6 +123,7 @@ p { margin: 0 0 1em; }
 .header-row {
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px; padding-top: 0; padding-bottom: 0; height: 72px;
+  max-width: 1360px;
 }
 
 .brand { display: flex; align-items: center; gap: 12px; transition: opacity 0.2s ease; flex-shrink: 0; }
@@ -169,9 +170,10 @@ p { margin: 0 0 1em; }
 
 /* keep both numbers on one line down to 860px, then stack them
    if the header ever feels tight on the smaller end of desktop */
-@media (max-width: 1300px) {
+   /* delete to fix CTA button error */
+/* @media (max-width: 1300px) {
   .main-nav { gap: 20px; }
-}
+} */
 
 
 .nav-toggle {
@@ -505,7 +507,7 @@ textarea.field-input { resize: vertical; }
 /* ==========================================================================
    Responsive
    ========================================================================== */
-@media (min-width: 1080px) {
+@media (min-width: 1321px) {
   .tel-pill { display: flex; }
 }
 
@@ -521,8 +523,8 @@ textarea.field-input { resize: vertical; }
   .job-card { max-width: 420px; }
   .service-detail-grid { grid-template-columns: 1fr; }
 }
-
-@media (max-width: 1080px) {
+/* commented out to fix CTA button issue */
+/* @media (max-width: 1080px) {
   .service-hero-illustration { display: none; }
   .main-nav {
     position: absolute; top: 100%; left: 0; right: 0; background: var(--teal);
@@ -546,6 +548,34 @@ textarea.field-input { resize: vertical; }
   .gallery-grid { grid-template-columns: 1fr 1fr; }
   section.section { padding: 52px 0; }
   body { padding-bottom: 74px; }
+} */
+
+@media (max-width: 1320px) {
+  .main-nav { position: absolute; top: 100%; left: 0; right: 0; background: var(--teal);
+    flex-direction: column; align-items: flex-start; padding: 6px 24px 20px;
+    border-bottom: 3px solid var(--gold); gap: 4px;
+    max-height: 0; overflow: hidden; opacity: 0; display: flex;
+    transition: max-height 0.4s var(--ease), opacity 0.3s var(--ease);
+    box-shadow: var(--shadow-lift);
+  }
+  .main-nav.is-open { max-height: 420px; opacity: 1; }
+  .main-nav a { padding: 10px 0; width: 100%; }
+  .main-nav a::after { display: none; }
+  .nav-toggle { display: flex; }
+  .header-actions .btn-primary { display: none; }
+  .mobile-quote-bar { display: flex; }
+  body { padding-bottom: 74px; }
+}
+
+@media (max-width: 1080px) {
+  .service-hero-illustration { display: none; }
+  .service-grid { grid-template-columns: 1fr; }
+  .service-line { grid-template-columns: 44px 1fr; }
+  .service-line .btn { grid-column: 1 / -1; margin-top: 6px; }
+  .form-row.two-up { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  section.section { padding: 52px 0; }
 }
 
 @media (max-width: 480px) {
