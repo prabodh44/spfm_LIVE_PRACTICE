@@ -367,7 +367,7 @@ p { margin: 0 0 1em; }
 .suburb-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .suburb-chip {
   font-family: var(--font-mono); font-size: 0.78rem; background: var(--mist); color: var(--teal-deep);
-  padding: 6px 12px; border-radius: 999px;
+  padding: 6px 12px; border-radius: 999px; font-weight: 600;
 }
 .areas-note {
   margin-top: 30px; text-align: center; color: var(--muted); font-size: 0.95rem;
